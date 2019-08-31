@@ -2,40 +2,45 @@ import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 const timeToShowOneSlide = 3000;
+const transitionTime = 500;
+const mountedStyle = { opacity: 1, transition: "opacity 500ms ease-in" };
+const unmountedStyle = { opacity: 0, transition: "opacity 500ms ease-in" };
 
 const CarouselSlider = ({ children }) => {
   const [slideIndex, setSliderIndex] = useState(0);
+  const [transition, setTransition] = useState(false);
+
   // get number of slides to switch
   const numberOfSlide = children.length;
-  // callback help to get the previous value into set interval
-  const savedCallback = useRef();
-  function callback() {
-    // set the index of slid need to show in carousel view
-    setSliderIndex((slideIndex + 1) % numberOfSlide);
-  }
 
   useEffect(() => {
-    savedCallback.current = callback;
-  });
-
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
+    let interval;
+    if (!transition) {
+      // set timer to slide change
+      interval = setTimeout(() => {
+        setTransition(true);
+      }, timeToShowOneSlide);
+    } else {
+      //set timer for transition
+      interval = setTimeout(() => {
+        setTransition(false);
+        setSliderIndex((slideIndex + 1) % numberOfSlide);
+      }, transitionTime);
     }
-    // set intervals to slide change
-    const interval = setInterval(tick, timeToShowOneSlide);
 
     return () => {
-      clearInterval(interval)
-    }
-  }, []);
-  
-  return <TransitionWrapper>{children[slideIndex]}</TransitionWrapper>;
-};
+      // clear timeout to avoid memory leaking issues
+      clearTimeout(interval);
+    };
+  }, [transition]);
 
+  return (
+    <TransitionWrapper style={transition ? unmountedStyle : mountedStyle}>
+      {children[slideIndex]}
+    </TransitionWrapper>
+  );
+};
 
 export default CarouselSlider;
 
-const TransitionWrapper = styled.div`
-  transition-duration: 3s;
-`;
+const TransitionWrapper = styled.div``;

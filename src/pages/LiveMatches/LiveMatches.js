@@ -4,21 +4,6 @@ import styled from "styled-components";
 import CarouselSlider from "../../components/CarouselSlider";
 import MatchSlide from "../../components/MatchSlide";
 import { unibetBaseUrl, dateReloadTime } from "../../constants";
-// const matchData = {
-//     event: {
-//         awayName: "away",
-//         homeName: "home",
-//         sport: "FOOTBALL",
-//         state: "STARTED",
-//         start: "2019-08-24T23:11Z"
-//     },
-//     liveData: {
-//         score: {
-//             home: 1,
-//             away: 2,
-//         }
-//     }
-// }
 
 const generatePropsMatchSlider = ({
   event: { homeName, awayName, start, sport, id },
@@ -62,9 +47,12 @@ const LiveMatches = ({ fetchUpcomingMatches, upcomingMatches }) => {
   };
 
   return (
+    <MainContainer>
     <BaseCol>
       <HeaderTitle>Live Matches</HeaderTitle>
-      <SubTitle>Here is the list of matches that are live right now</SubTitle>
+      <SubTitle topMargin>
+        Here is the list of matches that are live right now
+      </SubTitle>
       <BodyContainer>
         <CarouselContainer>
           <CarouselSlider>
@@ -78,18 +66,36 @@ const LiveMatches = ({ fetchUpcomingMatches, upcomingMatches }) => {
         </CarouselContainer>
         <DetailsContainer>
           <SubTitle>Live betting</SubTitle>
+          <Paragraph>
+            Place your bets as the action unfolds. We offer a wide selection of
+            live betting event and you can please both single and combination
+            bets.
+          </Paragraph>
+          <Paragraph>
+            You will be able to see an in-play scoreboard with the current
+            result and match stats, while on selecting events you will be also
+            be able to watch the action live with Unibet TV on the desktop site.
+          </Paragraph>
         </DetailsContainer>
       </BodyContainer>
     </BaseCol>
+    </MainContainer>
   );
 };
 
 export default LiveMatches;
 
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const BaseCol = styled.div`
   display: flex;
   flex-direction: column;
   padding: 16px;
+  max-width: 900px;
 `;
 
 const BaseTitle = styled.div`
@@ -100,17 +106,27 @@ const BaseTitle = styled.div`
 const HeaderTitle = styled(BaseTitle)`
   margin-top: 16px;
   font-size: 1.5rem;
+  font-weight: 600;
 `;
 
 const SubTitle = styled(BaseTitle)`
-  margin-top: 24px;
-  font-size: 1rem;
+  ${p => p.topMargin && `margin-top: 18px;`}
+  font-size: 0.96rem;
+  font-weight: 600;
 `;
 
 const BodyContainer = styled.div`
   margin-top: 16px;
   display: flex;
 `;
+
+const Paragraph = styled.p`
+  margin: 18px 0px 0px 0px;
+  color: #2b2a2a;
+  font-weight: 400;
+  font-size: 0.90rem;
+  line-height: 1.3;
+`
 
 const Col = styled.div`
   display: flex;
@@ -119,11 +135,11 @@ const Col = styled.div`
 
 const CarouselContainer = styled(Col)`
   padding-right: 18px;
-  flex: 2;
+  flex: 8;
   border-right: 1px solid #cccccc;
 `;
 
 const DetailsContainer = styled(Col)`
   margin-left: 18px;
-  flex: 1;
+  flex: 3;
 `;

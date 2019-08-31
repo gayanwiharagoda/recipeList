@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: "application for unibet",
       template: "src/index.html"
     })
   ]

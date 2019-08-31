@@ -5,7 +5,7 @@
   "author": "Gayan Wiharagoda",
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development --config webpack/webpack.config.dev.js",
-    "build": "rm -rf dist && webpack --mode production --config webpack/webpack.config.prod.js  && cp -a assets/ dist/",
+    "build": "rm -rf dist && webpack --mode production --config webpack/webpack.config.prod.js",
     "test": "jest"
   },
   "devDependencies": {

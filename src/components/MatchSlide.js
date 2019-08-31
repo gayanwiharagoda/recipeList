@@ -50,13 +50,12 @@ const MatchSlide = props => {
 
   return (
     <SliderBase>
-      {sport}
       {score && <ScoreText>{`${score.home} - ${score.away}`}</ScoreText>}
       <TeamDetailRow>
         <Icon src={getImageBySport(sport)} />
         <TeamText>{`${team.home} - ${team.away}`}</TeamText>
       </TeamDetailRow>
-      <TeamText marginTop>{`${date}, ${time}`}</TeamText>
+      <TimeText marginTop>{`${date}, ${time}`}</TimeText>
       <BitButton onClick={() => onClickBitPlacement(eventId)}>
         Place a bet
       </BitButton>
@@ -67,7 +66,7 @@ const MatchSlide = props => {
 export default MatchSlide;
 
 const BitButton = styled(Button)`
-  margin-top: 16px;
+  margin-top: 20px;
 `;
 
 const TeamDetailRow = styled.div`
@@ -95,6 +94,13 @@ const ScoreText = styled(BaseSpan)`
 const TeamText = styled(BaseSpan)`
   color: white;
 `;
+
+const TimeText = styled(BaseSpan)`
+  margin-top: 12px;
+  color: #999999;
+  font-weight: 500;
+  font-size: 0.9rem;
+`
 
 const SliderBase = styled.div`
   display: flex;

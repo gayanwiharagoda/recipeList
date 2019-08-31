@@ -17,11 +17,9 @@ describe("CarouselSlider", () => {
     const { getByText } = renderCarouselSlider();
 
     getByText("slide 1");
-    jest.advanceTimersByTime(3000);
+    jest.advanceTimersByTime(3500);
     getByText("slide 2");
-    jest.advanceTimersByTime(3000);
+    jest.advanceTimersByTime(3500);
     getByText("slide 1");
   });
-
-  xit("duration of slide animation should be 500 ms", () => {});
 });
