@@ -15,9 +15,6 @@ const persistConfig = {
  
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-
-
-
 export const sagaMiddleware = createSagaMiddleware();
 
 export const store =  createStore(

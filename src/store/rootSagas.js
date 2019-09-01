@@ -1,9 +1,9 @@
 
 import { all } from 'redux-saga/effects'
-import { watcher as liveMatchesWatcher } from "../models/liveMatches"
+import { watcher as recipesWatcher } from "../models/recipes"
 
 export default function* rootSaga() {
     yield all([
-      liveMatchesWatcher()
+      recipesWatcher()
     ])
 }  

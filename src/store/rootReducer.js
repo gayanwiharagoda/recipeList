@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { reducer as liveMatches } from "../models/liveMatches";
+import { reducer as recipesReducer } from "../models/recipes";
 
 export default combineReducers({
-  liveMatches
+  recipes: recipesReducer
 });
