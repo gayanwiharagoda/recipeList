@@ -30,10 +30,6 @@ const OverLayer = styled.div`
   cursor: pointer;
 `;
 
-const LeftContainer = styled.div`
-  flex: 1;
-`;
-
 const RecipeImage = styled.img`
   width: 100%;
   height: auto;

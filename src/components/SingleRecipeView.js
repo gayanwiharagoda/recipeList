@@ -30,7 +30,6 @@ const displayChef = chef =>
   );
 
 const SingleRecipeView = ({ recipe }) => {
-  console.log(">>> SingleRecipeView", recipe);
   const description = recipe.fields.description;
   const tags = recipe.fields.tags;
   const chef = recipe.fields.chef;

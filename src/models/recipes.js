@@ -38,13 +38,10 @@ export const reducer = createReducer(
 export function* fetchRecipeListSaga() {
   try {
     const response = yield call(getRecipes);
-    console.log(">>> response", response);
     const recipeList = populateRecipeList(response);
-    console.log(">>>. recipeList", recipeList);
     // save recipe list when services success
     yield put(fetchRecipeListSuccessAction(recipeList));
   } catch (e) {
-    console.log(">>>e", e);
     // save error object when error happened in the data fetching
     yield put(fetchRecipeListFailedAction(e));
   }

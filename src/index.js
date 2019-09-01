@@ -16,8 +16,8 @@ const App = () => {
         <ThemeProvider theme={{}}>
           <Router>
             <Switch>
-            <Route path="/recipe" component={RecipeView} />
-            <Route path="/" component={RecipeList} />
+              <Route path="/recipe" component={RecipeView} />
+              <Route path="/" component={RecipeList} />
             </Switch>
           </Router>
         </ThemeProvider>
