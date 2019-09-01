@@ -4,10 +4,36 @@ import styled from "styled-components";
 import RecipeItem from "./RecipeItem";
 import TagsView from "./TagView";
 
+const displayTags = tags =>
+  tags &&
+  tags.length !== 0 && (
+    <>
+      <Row>
+        <SubTitle>Tags</SubTitle>
+      </Row>
+      <Row paddingTop>
+        <TagsView tags={tags} />
+      </Row>
+    </>
+  );
+
+const displayChef = chef =>
+  chef && (
+    <>
+      <Row paddingTop>
+        <SubTitle>Chef</SubTitle>
+      </Row>
+      <Row paddingTop>
+        <Paragraph>{chef}</Paragraph>
+      </Row>
+    </>
+  );
+
 const SingleRecipeView = ({ recipe }) => {
+  console.log(">>> SingleRecipeView", recipe);
   const description = recipe.fields.description;
   const tags = recipe.fields.tags;
-  const chefName = recipe.fields.chef.fields.name;
+  const chef = recipe.fields.chef;
   return (
     <Col>
       <RecipeItem recipe={recipe} />
@@ -17,18 +43,8 @@ const SingleRecipeView = ({ recipe }) => {
           <Paragraph paddingTop>{description}</Paragraph>
         </LeftContainer>
         <RightContainer>
-          <Row>
-            <SubTitle>Tags</SubTitle>
-          </Row>
-          <Row paddingTop>
-            <TagsView tags={tags} />
-          </Row>
-          <Row paddingTop>
-            <SubTitle>Chef</SubTitle>
-          </Row>
-          <Row paddingTop>
-            <Paragraph>{chefName}</Paragraph>
-          </Row>
+          {displayTags(tags)}
+          {displayChef(chef)}
         </RightContainer>
       </BodyContainer>
     </Col>

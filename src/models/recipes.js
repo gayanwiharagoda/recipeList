@@ -1,5 +1,6 @@
 import { createAction, createReducer } from "redux-act";
 import { put, takeEvery, call } from "redux-saga/effects";
+import get from "lodash.get";
 
 import { getRecipes } from "../services/recipes";
 
@@ -37,19 +38,23 @@ export const reducer = createReducer(
 export function* fetchRecipeListSaga() {
   try {
     const response = yield call(getRecipes);
+    console.log(">>> response", response);
     const recipeList = populateRecipeList(response);
+    console.log(">>>. recipeList", recipeList);
     // save recipe list when services success
     yield put(fetchRecipeListSuccessAction(recipeList));
   } catch (e) {
+    console.log(">>>e", e);
     // save error object when error happened in the data fetching
     yield put(fetchRecipeListFailedAction(e));
   }
 }
 
-const mappedTags = (tags = [], entryList = []) => {
-  return tags.map(
-    ({ sys: { id } }) => entryList.find(entry => entry.sys.id == id).fields.name
-  );
+const getEntryNameById = (entries = [], id) =>
+  id ? entries.find(entry => entry.sys.id == id).fields.name : "";
+
+const mappedTags = (tags = [], entries = []) => {
+  return tags.map(({ sys: { id } }) => getEntryNameById(entries, id));
 };
 
 const populateRecipeList = ({
@@ -58,8 +63,15 @@ const populateRecipeList = ({
 }) =>
   items.map(item => {
     const photoId = item.fields.photo.sys.id;
+    // photo is required
     item.fields.photo = asserts.find(({ sys: { id } }) => id === photoId);
+    // tags are optional
     item.fields.tags = mappedTags(item.fields.tags, entries);
+    // chef is optional
+    item.fields.chef = getEntryNameById(
+      entries,
+      get(item, "fields.chef.sys.id", "")
+    );
 
     return item;
   });

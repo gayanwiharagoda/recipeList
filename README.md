@@ -20,3 +20,8 @@ npm run build
 ```bash
 npm start
 ```
+
+## Assumption
+1. Photo is with the response required
+2. tags and chef is optional
+3. Assert and entries can not be missing.
